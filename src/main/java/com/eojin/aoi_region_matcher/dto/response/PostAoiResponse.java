@@ -1,4 +1,4 @@
-package com.eojin.aoi_region_matcher.payload.response;
+package com.eojin.aoi_region_matcher.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PostRegionResponse {
+public class PostAoiResponse {
     private Integer id;
 }
 

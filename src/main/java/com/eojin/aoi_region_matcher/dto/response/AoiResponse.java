@@ -1,7 +1,7 @@
-package com.eojin.aoi_region_matcher.payload.response;
+package com.eojin.aoi_region_matcher.dto.response;
 
 
-import com.eojin.aoi_region_matcher.payload.request.Coordinate;
+import com.eojin.aoi_region_matcher.dto.Coordinate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

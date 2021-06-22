@@ -2,8 +2,8 @@ package com.eojin.aoi_region_matcher.service;
 
 
 import com.eojin.aoi_region_matcher.model.Region;
-import com.eojin.aoi_region_matcher.payload.request.PostRegionRequest;
-import com.eojin.aoi_region_matcher.payload.response.PostRegionResponse;
+import com.eojin.aoi_region_matcher.dto.request.PostRegionRequest;
+import com.eojin.aoi_region_matcher.dto.response.PostRegionResponse;
 import com.eojin.aoi_region_matcher.repository.RegionRepository;
 import com.eojin.aoi_region_matcher.util.GeometryConverter;
 import lombok.RequiredArgsConstructor;

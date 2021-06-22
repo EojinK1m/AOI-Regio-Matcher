@@ -1,10 +1,10 @@
 package com.eojin.aoi_region_matcher.service;
 
 import com.eojin.aoi_region_matcher.model.AOI;
-import com.eojin.aoi_region_matcher.payload.request.PostAoiRequest;
-import com.eojin.aoi_region_matcher.payload.response.AoiResponse;
-import com.eojin.aoi_region_matcher.payload.response.GetIntersectedAoiResponse;
-import com.eojin.aoi_region_matcher.payload.response.PostAoiResponse;
+import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
+import com.eojin.aoi_region_matcher.dto.response.AoiResponse;
+import com.eojin.aoi_region_matcher.dto.response.GetIntersectedAoiResponse;
+import com.eojin.aoi_region_matcher.dto.response.PostAoiResponse;
 import com.eojin.aoi_region_matcher.repository.AoiRepository;
 import com.eojin.aoi_region_matcher.util.GeometryConverter;
 import lombok.RequiredArgsConstructor;

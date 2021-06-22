@@ -1,6 +1,6 @@
 package com.eojin.aoi_region_matcher.util;
 
-import com.eojin.aoi_region_matcher.payload.request.Coordinate;
+import com.eojin.aoi_region_matcher.dto.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.PrecisionModel;
