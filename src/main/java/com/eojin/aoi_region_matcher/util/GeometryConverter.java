@@ -1,6 +1,7 @@
 package com.eojin.aoi_region_matcher.util;
 
 import com.eojin.aoi_region_matcher.dto.Coordinate;
+import com.eojin.aoi_region_matcher.exception.BadRequestException;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.PrecisionModel;
@@ -13,7 +14,6 @@ import java.util.List;
 public class GeometryConverter {
 
     public Polygon convertCoordinatesToPolygon(List<Coordinate> area){
-        GeometryFactory fact = new GeometryFactory(new PrecisionModel(), 4326);
         org.locationtech.jts.geom.Coordinate[] coordinates =
                 new org.locationtech.jts.geom.Coordinate[area.size()];
 
@@ -22,7 +22,20 @@ public class GeometryConverter {
             coordinates[i] = new org.locationtech.jts.geom.Coordinate(coordinate.getX(), coordinate.getY());
         }
 
-        return fact.createPolygon(coordinates);
+        return createPolygon(coordinates);
+    }
+
+    private Polygon createPolygon(org.locationtech.jts.geom.Coordinate[] coordinates){
+        GeometryFactory fact = new GeometryFactory(new PrecisionModel(), 4326);
+        Polygon polygon;
+
+        try{
+            polygon = fact.createPolygon(coordinates);
+        }catch (IllegalArgumentException e){
+            throw new BadRequestException();
+        }
+
+        return polygon;
     }
 
     public List<Coordinate> convertPolygonToCoordinateList(Polygon polygon){
