@@ -1,4 +1,4 @@
-package com.eojin.aoi_region_matcher.payload.request;
+package com.eojin.aoi_region_matcher.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
