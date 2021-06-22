@@ -1,11 +1,13 @@
 package com.eojin.aoi_region_matcher.service;
 
+import com.eojin.aoi_region_matcher.exception.NotFountException;
 import com.eojin.aoi_region_matcher.model.AOI;
 import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
 import com.eojin.aoi_region_matcher.dto.response.AoiResponse;
 import com.eojin.aoi_region_matcher.dto.response.GetIntersectedAoiResponse;
 import com.eojin.aoi_region_matcher.dto.response.PostAoiResponse;
 import com.eojin.aoi_region_matcher.repository.AoiRepository;
+import com.eojin.aoi_region_matcher.repository.RegionRepository;
 import com.eojin.aoi_region_matcher.util.GeometryConverter;
 import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Polygon;
@@ -18,13 +20,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AoiService {
     private final AoiRepository aoiRepository;
+
+    private final RegionRepository regionRepository;
+
     private final GeometryConverter geometryConverter;
 
     public GetIntersectedAoiResponse getAoiIntersectedWithRegion(Integer id){
-        List<AoiResponse> aoiResponses = new ArrayList<>();
+        throwIfNotRegionExist(id);
 
+        List<AoiResponse> aoiResponses = new ArrayList<>();
         List<AOI> aois = aoiRepository.findOverlappedAoiByRegionId(id);
-        System.out.print(aois);
 
         for(AOI aoi: aois){
             aoiResponses.add(
@@ -39,6 +44,11 @@ public class AoiService {
         return new GetIntersectedAoiResponse(aoiResponses);
     }
 
+    private void throwIfNotRegionExist(Integer id){
+        if(regionRepository.getRegionById(id)==null){
+            throw new NotFountException();
+        }
+    }
 
 
     public PostAoiResponse createAoi(PostAoiRequest request){
