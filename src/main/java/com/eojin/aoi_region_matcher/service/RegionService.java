@@ -1,6 +1,7 @@
 package com.eojin.aoi_region_matcher.service;
 
 
+import com.eojin.aoi_region_matcher.exception.RegionDuplicationException;
 import com.eojin.aoi_region_matcher.model.Region;
 import com.eojin.aoi_region_matcher.dto.request.PostRegionRequest;
 import com.eojin.aoi_region_matcher.dto.response.PostRegionResponse;
@@ -20,6 +21,7 @@ public class RegionService {
     private final GeometryConverter geometryConverter;
 
     public PostRegionResponse createRegion(PostRegionRequest request){
+        throwIfSameNameRegionExist(request.getName());
         Polygon polygon = geometryConverter.convertCoordinatesToPolygon(request.getArea());
 
         Region region = Region
@@ -30,5 +32,11 @@ public class RegionService {
         region = regionRepository.save(region);
 
         return new PostRegionResponse(region.getId());
+    }
+
+    private void throwIfSameNameRegionExist(String name){
+        if(regionRepository.getRegionByName(name) != null){
+            throw new RegionDuplicationException();
+        }
     }
 }
