@@ -1,6 +1,10 @@
 package com.eojin.aoi_region_matcher;
 
 
+import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
+import com.eojin.aoi_region_matcher.exception.AoiDuplicationException;
+import com.eojin.aoi_region_matcher.exception.RegionDuplicationException;
+import com.eojin.aoi_region_matcher.model.AOI;
 import com.eojin.aoi_region_matcher.model.Region;
 import com.eojin.aoi_region_matcher.dto.request.PostRegionRequest;
 import com.eojin.aoi_region_matcher.repository.RegionRepository;
@@ -43,7 +47,16 @@ public class RegionServiceTest {
     }
 
     @Test
-    public void When_CreateDuplicatedData_Then_ThrowDuplicatedException(){
+    public void When_CreateRegionAlreadySameNameExists_Then_ThrowRegionDuplicationException(){
+        PostRegionRequest request = new PostRegionRequest("한라산", new ArrayList<>());
+
+        Mockito.when(regionRepository.getRegionByName(request.getName()))
+                .thenReturn(new Region());
+
+        Assertions.assertThrows(
+                RegionDuplicationException.class,
+                () -> {regionService.createRegion(request);}
+        );
     }
 
 

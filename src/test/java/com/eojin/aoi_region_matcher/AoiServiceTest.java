@@ -62,7 +62,7 @@ public class AoiServiceTest {
     public void When_CreateAoiAlreadySameNameExists_Then_ThrowAoiDuplicationException(){
         PostAoiRequest request = new PostAoiRequest("한라산", new ArrayList<>());
 
-        Mockito.when(aoiRepository.findByName(request.getName()))
+        Mockito.when(aoiRepository.getByName(request.getName()))
                 .thenReturn(new AOI());
 
         Assertions.assertThrows(
