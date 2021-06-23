@@ -6,6 +6,6 @@ import com.eojin.aoi_region_matcher.exception.handler.ErrorCode;
 
 public class BadAreaException extends BusinessException {
     public BadAreaException() {
-        super(ErrorCode.BAD_REQUEST);
+        super(ErrorCode.BAD_AREA);
     }
 }
