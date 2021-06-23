@@ -2,8 +2,7 @@ package com.eojin.aoi_region_matcher.util;
 
 
 import com.eojin.aoi_region_matcher.dto.Coordinate;
-import com.eojin.aoi_region_matcher.exception.BadRequestException;
-import com.eojin.aoi_region_matcher.util.GeometryConverter;
+import com.eojin.aoi_region_matcher.exception.BadAreaException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -64,7 +63,7 @@ public class GeometryConverterTest {
         );
 
         Assertions.assertThrows(
-                BadRequestException.class,
+                BadAreaException.class,
                 ()->{geometryConverter.convertCoordinatesToPolygon(coordinates);}
         );
     }
