@@ -2,7 +2,7 @@
 ## 의존성
 - Gradle 7.x+
 - Java 11+
-- Docker
+
 
 ## 실행 방법 
 
