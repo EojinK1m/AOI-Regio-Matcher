@@ -1,7 +1,7 @@
 package com.eojin.aoi_region_matcher.util;
 
 import com.eojin.aoi_region_matcher.dto.Coordinate;
-import com.eojin.aoi_region_matcher.exception.BadRequestException;
+import com.eojin.aoi_region_matcher.exception.BadAreaException;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.PrecisionModel;
@@ -32,7 +32,7 @@ public class GeometryConverter {
         try{
             polygon = fact.createPolygon(coordinates);
         }catch (IllegalArgumentException e){
-            throw new BadRequestException();
+            throw new BadAreaException();
         }
 
         return polygon;
