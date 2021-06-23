@@ -2,6 +2,7 @@ package com.eojin.aoi_region_matcher;
 
 
 import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
+import com.eojin.aoi_region_matcher.exception.AoiDuplicationException;
 import com.eojin.aoi_region_matcher.exception.NotFountException;
 import com.eojin.aoi_region_matcher.model.AOI;
 import com.eojin.aoi_region_matcher.repository.AoiRepository;
@@ -35,6 +36,7 @@ public class AoiServiceTest {
     GeometryConverter geometryConverter;
 
 
+
     @Test
     public void When_CreateAoiSuccess_Then_ReturnResponseHavingAoiId(){
         AOI expectAoi = AOI.builder().id(3).name("한라산").area(null).build();
@@ -55,5 +57,19 @@ public class AoiServiceTest {
                 () -> {aoiService.getAoiIntersectedWithRegion(1);}
         );
     }
+
+    @Test
+    public void When_CreateAoiAlreadySameNameExists_Then_ThrowAoiDuplicationException(){
+        PostAoiRequest request = new PostAoiRequest("한라산", new ArrayList<>());
+
+        Mockito.when(aoiRepository.findByName(request.getName()))
+                .thenReturn(new AOI());
+
+        Assertions.assertThrows(
+                AoiDuplicationException.class,
+                () -> {aoiService.createAoi(request);}
+        );
+    }
+
 
 }
