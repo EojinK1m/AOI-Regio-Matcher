@@ -72,4 +72,18 @@ public class AoiService {
         }
     }
 
+    public AoiResponse getNearestAoi(Double x, Double y){
+        AOI aoi = aoiRepository.getNearestAoiByPoint(x, y);
+
+        if(aoi == null){
+            throw new NotFountException();
+        }
+
+        return new AoiResponse(
+                aoi.getId(),
+                geometryConverter.convertPolygonToCoordinateList(aoi.getArea()),
+                aoi.getName()
+        );
+    }
+
 }
