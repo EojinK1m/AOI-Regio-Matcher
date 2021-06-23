@@ -18,10 +18,9 @@
 
     > $ export AOI_REGION_MATCHER_PORT=8080
 
-3. 프로젝트 빌드 
-    > $ gradle jar
-4. 실행
-    > $ gradle bootRun
+3. 프로젝트 빌드 및 실행
+    > $ ./gradlew bootRun
+
 
 ### Docker로 Postgis 실행하기 
 1. PostGis 실행 
