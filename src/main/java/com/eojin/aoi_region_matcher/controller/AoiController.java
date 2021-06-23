@@ -19,8 +19,16 @@ public class AoiController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PostAoiResponse postAoi(@RequestBody @Valid PostAoiRequest request){
-        System.out.print(request.getName().getClass());
+    public PostAoiResponse postAoi(@RequestBody @Valid PostAoiRequest request) {
         return aoiService.createAoi(request);
     }
+
+    @GetMapping
+    public AoiResponse getNearestAoi(
+            @RequestParam(name = "lat") Double x,
+            @RequestParam(name = "long") Double y)
+    {
+        return aoiService.getNearestAoi(x, y);
+    }
+
 }
