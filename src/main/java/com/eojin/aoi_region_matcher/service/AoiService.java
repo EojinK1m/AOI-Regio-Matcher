@@ -1,5 +1,6 @@
 package com.eojin.aoi_region_matcher.service;
 
+import com.eojin.aoi_region_matcher.exception.AoiDuplicationException;
 import com.eojin.aoi_region_matcher.exception.NotFountException;
 import com.eojin.aoi_region_matcher.model.AOI;
 import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
@@ -52,6 +53,7 @@ public class AoiService {
 
 
     public PostAoiResponse createAoi(PostAoiRequest request){
+        throwIfSameNameAoiExist(request.getName());
         Polygon polygon = geometryConverter.convertCoordinatesToPolygon(request.getArea());
 
         AOI aoi = AOI
@@ -62,6 +64,12 @@ public class AoiService {
         aoi = aoiRepository.save(aoi);
 
         return new PostAoiResponse(aoi.getId());
+    }
+
+    private void throwIfSameNameAoiExist(String name){
+        if(aoiRepository.getByName(name) != null){
+            throw new AoiDuplicationException();
+        }
     }
 
 }
