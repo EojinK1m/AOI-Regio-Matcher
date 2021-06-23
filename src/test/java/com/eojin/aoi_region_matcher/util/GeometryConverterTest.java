@@ -1,4 +1,4 @@
-package com.eojin.aoi_region_matcher;
+package com.eojin.aoi_region_matcher.util;
 
 
 import com.eojin.aoi_region_matcher.dto.Coordinate;

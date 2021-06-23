@@ -1,4 +1,4 @@
-package com.eojin.aoi_region_matcher;
+package com.eojin.aoi_region_matcher.service;
 
 
 import com.eojin.aoi_region_matcher.dto.request.PostAoiRequest;
