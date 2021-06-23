@@ -7,7 +7,6 @@ import com.eojin.aoi_region_matcher.exception.NotFountException;
 import com.eojin.aoi_region_matcher.model.AOI;
 import com.eojin.aoi_region_matcher.repository.AoiRepository;
 import com.eojin.aoi_region_matcher.repository.RegionRepository;
-import com.eojin.aoi_region_matcher.service.AoiService;
 import com.eojin.aoi_region_matcher.util.GeometryConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -68,6 +67,31 @@ public class AoiServiceTest {
         Assertions.assertThrows(
                 AoiDuplicationException.class,
                 () -> {aoiService.createAoi(request);}
+        );
+    }
+
+    @Test
+    public void When_GetNearestAoiSuccess_Then_ReturnAoiResponse(){
+        Mockito.when(aoiRepository.getNearestAoiByPoint(any(), any()))
+                .thenReturn(
+                        AOI.builder()
+                                .id(1)
+                                .area(null)
+                                .name("무등산")
+                                .build()
+                );
+
+        Assertions.assertEquals(1, aoiService.getNearestAoi(1.1, 1.1).getId());
+    }
+
+
+    @Test
+    public void When_GetNearestAoiRepositoryReturnNull_Then_ThrowNotFoundException(){
+        Mockito.when(aoiRepository.getNearestAoiByPoint(any(), any())).thenReturn(null);
+
+        Assertions.assertThrows(
+                NotFountException.class,
+                () -> {aoiService.getNearestAoi(1.1, 2.2);}
         );
     }
 
