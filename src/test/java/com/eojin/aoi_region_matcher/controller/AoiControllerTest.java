@@ -137,4 +137,17 @@ public class AoiControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+    @Test
+    public void When_GetNearestAoiSuccess_Then_Response200() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/aois?lat=1.1&long=2.2"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void When_GetNearestAoiWithWrongParam_Then_Response400() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/aois?lat=fef&long=2.2"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
